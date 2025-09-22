@@ -16,6 +16,13 @@ import { SeatsModule } from './admin/seats/seats.module';
 import { Seat } from './admin/seats/entities/seat.entity';
 import { CouponsModule } from './admin/coupons/coupons.module';
 import { Coupon } from './admin/coupons/entities/coupon.entity';
+import { AuthModule as UserAuthModule } from './user/auth/auth.module';
+import { HomeModule } from './user/home/home.module';
+import { ReservationModule } from './user/reservation/reservation.module';
+import { Reservation } from './user/home/entities/reservation.entity';
+import { ReservationSeat } from './user/home/entities/reservation-seat.entity';
+import { PaymentModule } from './user/payment/payment.module';
+import { Payment } from './user/payment/entities/payment.entity';
 
 @Module({
   imports: [
@@ -27,7 +34,7 @@ import { Coupon } from './admin/coupons/entities/coupon.entity';
       username: 'postgres',
       password: 'hilalahmad',
       database: 'mrs',
-      entities: [User,Movie,Cinema,Screen,Showtime,Seat,Coupon],
+      entities: [User,Movie,Cinema,Screen,Showtime,Seat,Coupon,Reservation,ReservationSeat,Payment],
       synchronize: true,
     }),
     AuthModule,
@@ -38,6 +45,10 @@ import { Coupon } from './admin/coupons/entities/coupon.entity';
     ShowtimesModule,
     SeatsModule,
     CouponsModule,
+    UserAuthModule,
+    HomeModule,
+    ReservationModule,
+    PaymentModule
   ],
   controllers: [],
   providers: [],

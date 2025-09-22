@@ -2,7 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CouponsService } from './coupons.service';
 import { CreateCouponDto } from './dto/create-coupon.dto';
 import { UpdateCouponDto } from './dto/update-coupon.dto';
+import { Auth } from '../../common/guards/jwt-roles.guard';
+import { Role } from '../../common/enums/role.enum';
 
+@Auth(Role.ADMIN)
 @Controller('admin/coupons')
 export class CouponsController {
   constructor(private readonly couponsService: CouponsService) {}

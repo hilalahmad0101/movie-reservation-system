@@ -14,8 +14,8 @@ async function bootstrap() {
   ));
   app.useGlobalInterceptors(new SuccessResponseInterceptor());
 
-  // register filter for consistent { success:false, data:{...} } errors
   app.useGlobalFilters(new AllExceptionsFilter());
+
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
