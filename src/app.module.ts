@@ -23,10 +23,30 @@ import { Reservation } from './user/home/entities/reservation.entity';
 import { ReservationSeat } from './user/home/entities/reservation-seat.entity';
 import { PaymentModule } from './user/payment/payment.module';
 import { Payment } from './user/payment/entities/payment.entity';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 @Module({
   imports: [
     EventEmitterModule.forRoot(),
+    MailerModule.forRoot({
+      transport: {
+        host: 'smtp.ethereal.email', // or Gmail/Sendgrid
+        port: 587,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
+        },
+      },
+      defaults: {
+        from: '"Movie Reservation" <noreply@moviemail.com>',
+      },
+      template: {
+        dir: __dirname + '/templates',
+        adapter: new HandlebarsAdapter(),
+        options: { strict: true },
+      },
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',

@@ -5,10 +5,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Movie } from './entities/movie.entity';
 import { AuthModule } from '../auth/auth.module';
 import { MoviesListener } from './movies.listener';
+import { User } from '../user/entities/user.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Movie]),
+    TypeOrmModule.forFeature([Movie,User]),
     AuthModule
   ],
   controllers: [MovieController],
